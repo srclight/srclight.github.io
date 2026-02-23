@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Warm glow gradient for the bulb interior — brighter -->
+    <radialGradient id="glow" cx="50%" cy="42%" r="50%">
+      <stop offset="0%" stop-color="#fffef5"/>
+      <stop offset="30%" stop-color="#fef3c7" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#fde68a" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Outer glow halo -->
+    <radialGradient id="halo" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#fbbf24" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Bright amber gradient for code symbols -->
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer halo glow -->
+  <ellipse cx="256" cy="210" rx="220" ry="220" fill="url(#halo)"/>
+
+  <!-- Inner glow behind bulb -->
+  <ellipse cx="256" cy="210" rx="170" ry="170" fill="url(#glow)"/>
+
+  <!-- Light bulb body — lighter stroke for visibility -->
+  <path d="
+    M256,48
+    C168,48 100,120 100,208
+    C100,272 140,310 172,352
+    L172,380
+    L340,380
+    L340,352
+    C372,310 412,272 412,208
+    C412,120 344,48 256,48Z
+  " fill="rgba(255,251,235,0.12)" stroke="#c8cad0" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Filament lines (brighter) -->
+  <path d="M220,280 Q238,240 256,280 Q274,240 292,280" fill="none" stroke="#fbbf24" stroke-width="5" opacity="0.5"/>
+
+  <!-- Code symbols: < > centered in bulb — brighter -->
+  <text x="175" y="248" font-family="'SF Mono','Fira Code','Cascadia Code','Consolas',monospace" font-size="120" font-weight="700" fill="url(#codeGrad)" text-anchor="middle">&lt;</text>
+  <text x="337" y="248" font-family="'SF Mono','Fira Code','Cascadia Code','Consolas',monospace" font-size="120" font-weight="700" fill="url(#codeGrad)" text-anchor="middle">&gt;</text>
+
+  <!-- Light rays — brighter and longer -->
+  <g stroke="#fbbf24" stroke-width="6" stroke-linecap="round" opacity="0.75">
+    <line x1="256" y1="28" x2="256" y2="2"/>
+    <line x1="165" y1="55" x2="150" y2="32"/>
+    <line x1="347" y1="55" x2="362" y2="32"/>
+    <line x1="110" y1="115" x2="90" y2="100"/>
+    <line x1="402" y1="115" x2="422" y2="100"/>
+  </g>
+
+  <!-- Bulb base / screw cap — lighter -->
+  <rect x="184" y="384" width="144" height="16" rx="6" fill="#9ca3af"/>
+  <rect x="192" y="404" width="128" height="14" rx="5" fill="#9ca3af"/>
+  <rect x="200" y="422" width="112" height="14" rx="5" fill="#9ca3af"/>
+  <rect x="210" y="440" width="92" height="14" rx="7" fill="#9ca3af"/>
+
+  <!-- Screw threads -->
+  <line x1="188" y1="400" x2="324" y2="400" stroke="#6b7280" stroke-width="2" opacity="0.5"/>
+  <line x1="196" y1="418" x2="316" y2="418" stroke="#6b7280" stroke-width="2" opacity="0.5"/>
+  <line x1="204" y1="436" x2="308" y2="436" stroke="#6b7280" stroke-width="2" opacity="0.5"/>
+</svg>
