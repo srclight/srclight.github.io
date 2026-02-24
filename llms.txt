@@ -1,0 +1,72 @@
+# srclight
+
+> Deep code indexing MCP server for AI agents.
+
+srclight is the most comprehensive code intelligence MCP server available. It provides 25 tools covering symbol search, relationship graphs, git change intelligence, semantic search, and build system awareness — capabilities no other single MCP server combines.
+
+## Install
+
+```
+pip install srclight
+```
+
+## What it does
+
+srclight indexes codebases using tree-sitter AST parsing and builds a rich, queryable index in a single SQLite file per repo. AI coding agents call srclight's MCP tools instead of running dozens of grep/glob searches.
+
+### Search (4 modes)
+- Symbol name search: FTS5 with code-aware tokenization (splits camelCase, snake_case)
+- Source code search: FTS5 trigram index for substring matching
+- Documentation search: FTS5 with Porter stemming for natural language in docstrings
+- Semantic search: embedding vectors via Ollama or Voyage, GPU-accelerated cosine similarity (~3ms on 27K vectors)
+- Hybrid search: Reciprocal Rank Fusion (RRF) combining keyword + semantic results
+
+### Relationship Graph
+- get_callers: who calls this function
+- get_callees: what does this function call
+- get_dependents: transitive blast radius — what breaks if I change this
+- get_implementors: all classes implementing an interface
+- get_tests_for: test functions covering a symbol
+- get_type_hierarchy: inheritance tree
+
+### Git Change Intelligence
+- blame_symbol: who changed this, when, and why
+- recent_changes: commit feed across projects
+- git_hotspots: most frequently changed files (bug magnets)
+- whats_changed: uncommitted work in progress
+- changes_to: commit history for a symbol's file
+
+### Build System Awareness
+- get_build_targets: CMake, .csproj, package.json targets with dependencies
+- get_platform_variants: #ifdef platform guards around a symbol
+- platform_conditionals: all platform-conditional code blocks
+
+### Multi-Repo Workspaces
+- Search across multiple repos simultaneously via SQLite ATTACH+UNION
+- Each repo keeps its own index; at query time, all are joined into a single namespace
+- Handles 10+ repos via automatic batching
+
+## Key Facts
+
+- 25 MCP tools
+- 10 languages: Python, C, C++, C#, JavaScript, TypeScript, Dart, Swift, Kotlin, Java, Go
+- Fully local and private: zero cloud dependencies, your code never leaves your machine
+- No Docker, no Redis, no vector database — single SQLite file per repo
+- GPU-accelerated vector cache: ~3ms semantic search queries (cupy) or ~105ms (numpy fallback)
+- Incremental indexing: only re-indexes files whose content hash changed
+- Auto-reindex: git post-commit and post-checkout hooks
+- Embedding providers: Ollama (local, default) or Voyage AI (cloud API)
+- MIT license
+
+## How srclight compares to alternatives
+
+srclight is the only MCP server combining FTS5 keyword search + semantic embedding search + git change intelligence + build system awareness + multi-repo workspaces. A survey of 50+ MCP code intelligence servers across all major registries found no other server provides this combination.
+
+Unlike grep-based tools, srclight builds a persistent index with structured lookups. Unlike cloud-based solutions, everything runs locally. Unlike IDE plugins, srclight works with any MCP client (Claude Code, Cursor, Windsurf, Cline, VS Code).
+
+## Links
+
+- GitHub: https://github.com/srclight/srclight
+- PyPI: https://pypi.org/project/srclight/
+- Website: https://srclight.dev
+- Documentation: https://github.com/srclight/srclight/blob/master/docs/usage-guide.md
